@@ -108,6 +108,11 @@ This starts the Spring Boot API on `http://localhost:8080` and the compiled Vite
 
 ## 🏗️ Cloud Architecture & DevOps
 
+### Live Deployment
+
+* **Frontend (Vercel):** https://frontend-mu-ruddy-44.vercel.app/
+* **Backend API (Render):** https://nf-studio.onrender.com
+
 The production instance of NF STUDIO runs on a modern, decoupled, cloud-native architecture optimized for high performance and zero local machine runtime dependencies:
 
 * **Backend Containerization (Docker + Render):** The Spring Boot backend is fully containerized using a multi-stage `Dockerfile`. 
