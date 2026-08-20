@@ -14,8 +14,6 @@
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-
-
 </div>
 
 ---
@@ -110,7 +108,7 @@ This starts the Spring Boot API on `http://localhost:8080` and the compiled Vite
 
 ## 🏗️ Cloud Architecture & DevOps
 
-The production instance of DBNorm runs on a modern, decoupled, cloud-native architecture optimized for high performance and zero local machine runtime dependencies:
+The production instance of NF STUDIO runs on a modern, decoupled, cloud-native architecture optimized for high performance and zero local machine runtime dependencies:
 
 * **Backend Containerization (Docker + Render):** The Spring Boot backend is fully containerized using a multi-stage `Dockerfile`. 
   * *Stage 1 (Build):* Compiles and packages the application using a heavy Maven OpenJDK 17 image.
