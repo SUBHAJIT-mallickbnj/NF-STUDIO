@@ -1,0 +1,248 @@
+👇 STEP-BY-STEP VISUAL GUIDE - TEST #1 (EMPLOYEE) 👇
+═════════════════════════════════════════════════════════════════════════════
+
+BEFORE YOU START:
+  ✓ Backend is running on http://localhost:8080
+  ✓ Frontend is running on http://localhost:5173
+  ✓ You have the browser open at http://localhost:5173
+
+═════════════════════════════════════════════════════════════════════════════
+
+STEP 1: You should see this form
+
+        ┌─────────────────────────────────────┐
+        │  DBNorm NORMALIZER TOOL             │
+        │                                     │
+        │  TABLE NAME                         │
+        │  ┌─────────────────────────────────┐│
+        │  │ e.g., Employees                 ││
+        │  └─────────────────────────────────┘│
+        │                                     │
+        │  COLUMNS                            │
+        │  ┌──────────────────────┐ ┌────┐   │
+        │  │ Add column name      │ │ +  │   │
+        │  └──────────────────────┘ └────┘   │
+        │                                     │
+        │  PRIMARY KEY                        │
+        │  ┌─────────────────────────────────┐│
+        │  │ e.g., id, employee_id           ││
+        │  └─────────────────────────────────┘│
+        │                                     │
+        │  FUNCTIONAL DEPENDENCIES (BCNF)    │
+        │  ┌──────────┐     ┌──────────┐ ┌──┐│
+        │  │LHS (A)   │ --> │RHS (B)   │ │+ ││
+        │  └──────────┘     └──────────┘ └──┘│
+        │                                     │
+        └─────────────────────────────────────┘
+
+═════════════════════════════════════════════════════════════════════════════
+
+STEP 2: Fill in TABLE NAME
+
+ACTION: Click on "TABLE NAME" field and clear it
+        Type: Employee
+
+RESULT: 
+        ┌──────────────────────┐
+        │ Employee             │
+        └──────────────────────┘
+
+═════════════════════════════════════════════════════════════════════════════
+
+STEP 3: Add COLUMNS
+
+ACTION: Click the "+" button next to "COLUMNS"
+
+First column:
+  → Type in field: EmpID
+  → Press Enter or Tab
+
+Click "+" again for second column:
+  → Type: EmpName
+
+Click "+" again for third column:
+  → Type: DeptID
+
+Click "+" again for fourth column:
+  → Type: DeptName
+
+Click "+" again for fifth column:
+  → Type: Location
+
+RESULT: You should see 5 columns listed:
+        ✓ EmpID
+        ✓ EmpName
+        ✓ DeptID
+        ✓ DeptName
+        ✓ Location
+
+═════════════════════════════════════════════════════════════════════════════
+
+STEP 4: Set PRIMARY KEY
+
+ACTION: Click on "PRIMARY KEY" field
+        Clear any existing text
+        Type: EmpID
+
+RESULT:
+        ┌──────────────────────┐
+        │ EmpID                │
+        └──────────────────────┘
+
+═════════════════════════════════════════════════════════════════════════════
+
+STEP 5: Add FUNCTIONAL DEPENDENCIES
+
+ACTION: Look for "FUNCTIONAL DEPENDENCIES (BCNF)" section
+        You should see boxes for LHS and RHS with a "+" button
+
+FIRST DEPENDENCY (EmpID → EmpName):
+  1. Click the "+" button
+  2. Left side (LHS): Type "EmpID"
+  3. Right side (RHS): Type "EmpName"
+  4. Click "+" to confirm or move to next
+
+SECOND DEPENDENCY (EmpID → DeptID):
+  1. Click the "+" button
+  2. Left side (LHS): Type "EmpID"
+  3. Right side (RHS): Type "DeptID"
+
+THIRD DEPENDENCY (DeptID → DeptName):
+  1. Click the "+" button
+  2. Left side (LHS): Type "DeptID"
+  3. Right side (RHS): Type "DeptName"
+
+FOURTH DEPENDENCY (DeptID → Location):
+  1. Click the "+" button
+  2. Left side (LHS): Type "DeptID"
+  3. Right side (RHS): Type "Location"
+
+RESULT: You should see 4 functional dependencies:
+        ✓ EmpID → EmpName
+        ✓ EmpID → DeptID
+        ✓ DeptID → DeptName
+        ✓ DeptID → Location
+
+═════════════════════════════════════════════════════════════════════════════
+
+STEP 6: ANALYZE THE SCHEMA
+
+ACTION: Look for an "Analyze" or "Detect" button
+        Click it
+
+EXPECTED RESULT:
+        ┌─────────────────────────────────────┐
+        │ ANALYSIS RESULTS                    │
+        │                                     │
+        │ Highest Normal Form: 2NF            │
+        │                                     │
+        │ Reasons:                            │
+        │ • DeptName and Location partially   │
+        │   depend on DeptID (which is only   │
+        │   part of the key)                  │
+        │                                     │
+        │ Candidate Keys:                     │
+        │ • EmpID                             │
+        └─────────────────────────────────────┘
+
+🎯 SUCCESS: It shows 2NF with violation! ✅
+
+═════════════════════════════════════════════════════════════════════════════
+
+STEP 7: NORMALIZE THE SCHEMA
+
+ACTION: Look for button "Normalize to 3NF" or similar
+        Click it
+
+EXPECTED RESULT:
+        ┌─────────────────────────────────────┐
+        │ NORMALIZATION RESULTS               │
+        │ Target: 3NF                         │
+        │                                     │
+        │ Decomposition:                      │
+        │                                     │
+        │ Table 1: Employee                   │
+        │ ├─ EmpID (PK)                       │
+        │ ├─ EmpName                          │
+        │ └─ DeptID (FK)                      │
+        │                                     │
+        │ Table 2: Department                 │
+        │ ├─ DeptID (PK)                      │
+        │ ├─ DeptName                         │
+        │ └─ Location                         │
+        │                                     │
+        └─────────────────────────────────────┘
+
+🎯 SUCCESS: Created 2 tables! ✅
+
+═════════════════════════════════════════════════════════════════════════════
+
+FINAL VERIFICATION CHECKLIST:
+─────────────────────────────────────────────────────────────────────────
+
+After completing all steps, verify:
+
+✅ Detect showed "2NF" 
+   (Not 1NF, not 3NF, but 2NF)
+
+✅ Reason mentioned partial dependency
+   (Something about DeptID having columns that depend on it)
+
+✅ Normalize created 2 tables
+   (Not 1 table, not 3 tables, but 2)
+
+✅ Employee table has: EmpID, EmpName, DeptID
+   (DeptName and Location are gone)
+
+✅ Department table has: DeptID, DeptName, Location
+   (EmpID and EmpName are gone)
+
+📊 IF ALL ✅ → NORMALIZATION IS WORKING PERFECTLY! 🎉
+
+═════════════════════════════════════════════════════════════════════════════
+
+TROUBLESHOOTING:
+─────────────────────────────────────────────────────────────────────────
+
+Problem: Shows "1NF" instead of "2NF"
+  → Make sure you added ALL functional dependencies
+  → Check spelling of column names
+
+Problem: Shows "3NF" instead of "2NF"
+  → You might have entered dependencies wrong
+  → Double-check LHS and RHS directions
+
+Problem: Creates 1 table instead of 2
+  → The normalization might not be working
+  → Try normalizing to BCNF instead
+
+Problem: Creates 3 or 4 tables
+  → You might have extra dependencies
+  → Verify you added exactly 4 dependencies
+
+Problem: Can't find buttons
+  → Scroll down on the page
+  → The buttons might be below the fold
+
+═════════════════════════════════════════════════════════════════════════════
+
+NEXT TESTS TO TRY:
+─────────────────────────────────────────────────────────────────────────
+
+After Test #1 works, try:
+
+Test #2 (Simple Employee):
+  → Should show 3NF (no violations)
+  → Should create 1 table (no changes)
+
+Test #3 (CourseRegistration):
+  → Should show 2NF (more complex)
+  → Should create 4 tables when normalized
+
+═════════════════════════════════════════════════════════════════════════════
+
+✨ CONGRATULATIONS! 
+   If you got through all these steps successfully,
+   your DB-NORM normalization is working perfectly! ✨
+
+═════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,28 @@
+# Java and Maven build output
+dbnorm-backend/target/
+*.class
+
+# Node and Vite output
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+*.local
+
+# Runtime and crash diagnostics
+*.log
+hs_err_pid*
+replay_pid*
+
+# IDE and operating-system files
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# Local environment and temporary files
+.env
+.env.*
+!.env.example
+*.tmp
+*.swp

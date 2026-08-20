@@ -1,0 +1,9 @@
+StudentID,StudentName,CourseID,CourseName,InstructorID,InstructorName,Department,Semester,Grade
+S001,Alice,C101,Database,I001,Prof.Smith,CS,2024-Fall,A
+S001,Alice,C102,DataStructure,I002,Prof.Johnson,CS,2024-Fall,B
+S002,Bob,C101,Database,I001,Prof.Smith,CS,2024-Fall,B+
+S002,Bob,C103,WebDev,I003,Prof.Brown,CS,2024-Fall,A
+S003,Charlie,C102,DataStructure,I002,Prof.Johnson,CS,2024-Fall,A
+S003,Charlie,C103,WebDev,I003,Prof.Brown,CS,2024-Fall,B
+S004,Diana,C101,Database,I001,Prof.Smith,CS,2024-Fall,A+
+S004,Diana,C104,AI,I004,Prof.Davis,AI,2024-Fall,A

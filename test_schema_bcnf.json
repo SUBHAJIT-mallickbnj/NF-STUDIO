@@ -1,0 +1,10 @@
+{
+  "tableName": "StudentEnrollment",
+  "attributes": ["StudentID", "StudentName", "CourseID", "CourseName", "Semester", "Grade"],
+  "primaryKey": ["StudentID", "CourseID"],
+  "functionalDependencies": [
+    {"lhs": ["StudentID"], "rhs": ["StudentName"]},
+    {"lhs": ["CourseID"], "rhs": ["CourseName"]},
+    {"lhs": ["StudentID", "CourseID"], "rhs": ["Semester", "Grade"]}
+  ]
+}

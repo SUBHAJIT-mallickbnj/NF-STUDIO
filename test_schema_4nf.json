@@ -1,0 +1,13 @@
+{
+  "tableName": "StudentCourseInstructor",
+  "attributes": ["StudentID", "StudentName", "CourseID", "CourseName", "InstructorID"],
+  "primaryKey": ["StudentID", "CourseID", "InstructorID"],
+  "functionalDependencies": [
+    {"lhs": ["StudentID"], "rhs": ["StudentName"]},
+    {"lhs": ["CourseID"], "rhs": ["CourseName"]}
+  ],
+  "multivaluedDependencies": [
+    {"lhs": ["StudentID"], "rhs": ["CourseID"]},
+    {"lhs": ["StudentID"], "rhs": ["InstructorID"]}
+  ]
+}

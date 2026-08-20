@@ -1,0 +1,281 @@
+🚀 QUICK TEST CARD - COPY & PASTE TO DB-NORM
+═════════════════════════════════════════════════════════════════════════════
+
+TEST #1: EMPLOYEE (Should show 2NF with violations)
+─────────────────────────────────────────────────────────────────────────
+
+Fill in the form:
+
+TABLE NAME
+└─ Employee
+
+COLUMNS (click + and add each)
+├─ EmpID
+├─ EmpName
+├─ DeptID
+├─ DeptName
+└─ Location
+
+PRIMARY KEY
+└─ EmpID
+
+FUNCTIONAL DEPENDENCIES (click + and add each)
+├─ EmpID → EmpName
+├─ EmpID → DeptID
+├─ DeptID → DeptName
+└─ DeptID → Location
+
+EXPECTED RESULT: 2NF ⚠️
+Reason: DeptName and Location partially depend on DeptID
+
+AFTER NORMALIZE TO 3NF: 2 TABLES ✅
+├─ Employee(EmpID, EmpName, DeptID)
+└─ Department(DeptID, DeptName, Location)
+
+═════════════════════════════════════════════════════════════════════════════
+
+TEST #2: COURSE REGISTRATION (Should show 2NF)
+─────────────────────────────────────────────────────────────────────────
+
+TABLE NAME
+└─ CourseRegistration
+
+COLUMNS
+├─ StudentID
+├─ StudentName
+├─ CourseID
+├─ CourseName
+├─ InstructorID
+└─ InstructorName
+
+PRIMARY KEY
+└─ StudentID, CourseID
+
+FUNCTIONAL DEPENDENCIES
+├─ StudentID → StudentName
+├─ CourseID → CourseName
+├─ CourseID → InstructorID
+└─ InstructorID → InstructorName
+
+EXPECTED RESULT: 2NF ⚠️
+Reason: StudentName partially depends on StudentID only
+
+AFTER NORMALIZE TO 3NF: 4 TABLES ✅
+├─ StudentCourse(StudentID, CourseID)
+├─ Student(StudentID, StudentName)
+├─ Course(CourseID, CourseName, InstructorID)
+└─ Instructor(InstructorID, InstructorName)
+
+═════════════════════════════════════════════════════════════════════════════
+
+TEST #3: SIMPLE (Already Perfect - Should show 3NF)
+─────────────────────────────────────────────────────────────────────────
+
+TABLE NAME
+└─ Employee
+
+COLUMNS
+├─ EmployeeID
+├─ Name
+└─ Salary
+
+PRIMARY KEY
+└─ EmployeeID
+
+FUNCTIONAL DEPENDENCIES
+├─ EmployeeID → Name
+└─ EmployeeID → Salary
+
+EXPECTED RESULT: 3NF ✅
+Reason: No violations - already normalized!
+
+AFTER NORMALIZE: SAME ✅
+└─ Employee(EmployeeID, Name, Salary)
+
+═════════════════════════════════════════════════════════════════════════════
+
+TEST #4: HOSPITAL (Transitive Dependency - Should show 2NF)
+─────────────────────────────────────────────────────────────────────────
+
+TABLE NAME
+└─ PatientVisit
+
+COLUMNS
+├─ PatientID
+├─ PatientName
+├─ DoctorID
+├─ DoctorName
+├─ DepartmentID
+└─ DepartmentName
+
+PRIMARY KEY
+└─ PatientID
+
+FUNCTIONAL DEPENDENCIES
+├─ PatientID → PatientName
+├─ PatientID → DoctorID
+├─ DoctorID → DoctorName
+├─ DoctorID → DepartmentID
+└─ DepartmentID → DepartmentName
+
+EXPECTED RESULT: 2NF ⚠️
+Reason: Transitive dependencies (PatientID → DoctorID → DepartmentID)
+
+AFTER NORMALIZE TO 3NF: 3 TABLES ✅
+├─ Patient(PatientID, PatientName, DoctorID)
+├─ Doctor(DoctorID, DoctorName, DepartmentID)
+└─ Department(DepartmentID, DepartmentName)
+
+═════════════════════════════════════════════════════════════════════════════
+
+VERIFICATION GUIDE:
+─────────────────────────────────────────────────────────────────────────
+
+After each test, check:
+
+[✓] Does it show the expected Normal Form?
+[✓] Do the reasons make sense?
+[✓] Does the decomposition look correct?
+[✓] Are candidate keys identified?
+[✓] Can you export the result?
+
+If YES to all → ✅ NORMALIZATION IS WORKING!
+
+═════════════════════════════════════════════════════════════════════════════
+
+WHAT EACH NORMAL FORM MEANS:
+─────────────────────────────────────────────────────────────────────────
+
+1NF (First Normal Form)
+  - Atomic values only
+  - No repeating groups
+  - Each column has unique values
+
+2NF (Second Normal Form)
+  - Meets 1NF requirements
+  - No partial dependencies
+  - All non-key attributes depend on ENTIRE primary key
+
+3NF (Third Normal Form)
+  - Meets 2NF requirements
+  - No transitive dependencies
+  - Non-key attributes depend only on primary key
+
+BCNF (Boyce-Codd Normal Form)
+  - Stricter than 3NF
+  - Every determinant is a candidate key
+  - Rarely needed in practice
+
+═════════════════════════════════════════════════════════════════════════════
+
+COMMON VIOLATIONS TO SPOT:
+─────────────────────────────────────────────────────────────────────────
+
+PARTIAL DEPENDENCY (2NF Violation):
+  Problem: Non-key column depends on part of composite key
+  Example: In (StudentID, CourseID) → StudentName depends only on StudentID
+  Solution: Move StudentName to separate table with StudentID
+
+TRANSITIVE DEPENDENCY (3NF Violation):
+  Problem: Non-key column depends on another non-key column
+  Example: PatientID → DoctorID → DepartmentID
+  Solution: Create separate table for intermediate dependency
+
+MULTIPLE CANDIDATE KEYS:
+  Problem: Table has more than one possible primary key
+  Example: StudentID or StudentEmail could both be primary key
+  Solution: Choose one as primary, others as unique constraints
+
+═════════════════════════════════════════════════════════════════════════════
+
+STEP-BY-STEP FOR TEST #1 (Employee):
+─────────────────────────────────────────────────────────────────────────
+
+1. Open http://localhost:5173
+   └─ See the input form
+
+2. Enter Table Name
+   └─ Type: Employee
+
+3. Add Columns (click + for each)
+   └─ EmpID
+   └─ EmpName
+   └─ DeptID
+   └─ DeptName
+   └─ Location
+
+4. Set Primary Key
+   └─ Type: EmpID
+
+5. Add Dependencies (click + for each)
+   └─ First: EmpID → EmpName (click +)
+   └─ Second: EmpID → DeptID (click +)
+   └─ Third: DeptID → DeptName (click +)
+   └─ Fourth: DeptID → Location (click +)
+
+6. Click "Analyze" or "Detect Normal Form"
+   └─ Should show: 2NF
+   └─ Should show reasons for violations
+
+7. Click "Normalize to 3NF"
+   └─ Should show 2 decomposed tables
+   └─ Employee and Department
+
+8. Check Results
+   └─ Employee(EmpID, EmpName, DeptID)
+   └─ Department(DeptID, DeptName, Location)
+
+✅ SUCCESS - NORMALIZATION WORKING!
+
+═════════════════════════════════════════════════════════════════════════════
+
+TIPS FOR TESTING:
+─────────────────────────────────────────────────────────────────────────
+
+• Start with Test #1 (Employee) - easiest to verify
+• Then try Test #3 (Simple) - should show 3NF immediately
+• Then Test #2 (CourseRegistration) - more complex
+• Finally Test #4 (Hospital) - most complex
+
+• Each test should match the expected output
+• If output differs, check the functional dependencies
+• Make sure you entered dependencies in the correct direction (A → B)
+
+═════════════════════════════════════════════════════════════════════════════
+
+SAMPLE DATA FOR VISUALIZATION:
+─────────────────────────────────────────────────────────────────────────
+
+Employee Table (Before Normalization):
+┌──────────┬──────────┬──────────┬─────────────┬──────────┐
+│ EmpID    │ EmpName  │ DeptID   │ DeptName    │ Location │
+├──────────┼──────────┼──────────┼─────────────┼──────────┤
+│ 101      │ John     │ D1       │ HR          │ Floor-1  │
+│ 102      │ Sarah    │ D1       │ HR          │ Floor-1  │
+│ 103      │ Mike     │ D2       │ IT          │ Floor-2  │
+│ 104      │ Emma     │ D2       │ IT          │ Floor-2  │
+└──────────┴──────────┴──────────┴─────────────┴──────────┘
+
+After Normalization to 3NF:
+
+Employee Table:
+┌──────────┬──────────┬──────────┐
+│ EmpID    │ EmpName  │ DeptID   │
+├──────────┼──────────┼──────────┤
+│ 101      │ John     │ D1       │
+│ 102      │ Sarah    │ D1       │
+│ 103      │ Mike     │ D2       │
+│ 104      │ Emma     │ D2       │
+└──────────┴──────────┴──────────┘
+
+Department Table:
+┌──────────┬─────────────┬──────────┐
+│ DeptID   │ DeptName    │ Location │
+├──────────┼─────────────┼──────────┤
+│ D1       │ HR          │ Floor-1  │
+│ D2       │ IT          │ Floor-2  │
+└──────────┴─────────────┴──────────┘
+
+═════════════════════════════════════════════════════════════════════════════
+
+✨ Start testing now! All tests should pass if normalization is working! ✨

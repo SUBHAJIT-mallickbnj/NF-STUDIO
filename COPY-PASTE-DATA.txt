@@ -1,0 +1,188 @@
+📋 COPY-PASTE TEST DATA (EASIEST TO USE)
+═════════════════════════════════════════════════════════════════════════════
+
+🔥 TEST #1: EMPLOYEE (START HERE!) 🔥
+═════════════════════════════════════════════════════════════════════════════
+
+Table Name: Employee
+Columns: EmpID, EmpName, DeptID, DeptName, Location
+Primary Key: EmpID
+
+Functional Dependencies:
+  EmpID → EmpName
+  EmpID → DeptID
+  DeptID → DeptName
+  DeptID → Location
+
+Expected Result: 2NF with violations
+✅ Will normalize to 2 tables (Employee + Department)
+
+─────────────────────────────────────────────────────────────────────────
+
+🔥 TEST #2: SIMPLE EMPLOYEE (ALREADY GOOD!) 🔥
+═════════════════════════════════════════════════════════════════════════════
+
+Table Name: Employee
+Columns: EmployeeID, EmployeeName, Salary
+Primary Key: EmployeeID
+
+Functional Dependencies:
+  EmployeeID → EmployeeName
+  EmployeeID → Salary
+
+Expected Result: 3NF (no violations!)
+✅ No changes needed
+
+─────────────────────────────────────────────────────────────────────────
+
+🔥 TEST #3: COURSE REGISTRATION (COMPLEX!) 🔥
+═════════════════════════════════════════════════════════════════════════════
+
+Table Name: CourseRegistration
+Columns: StudentID, StudentName, CourseID, CourseName, InstructorID, InstructorName
+Primary Key: StudentID, CourseID
+
+Functional Dependencies:
+  StudentID → StudentName
+  CourseID → CourseName
+  CourseID → InstructorID
+  InstructorID → InstructorName
+
+Expected Result: 2NF with partial dependency
+✅ Will normalize to 4 tables
+
+─────────────────────────────────────────────────────────────────────────
+
+🔥 TEST #4: BOOK AUTHOR (SUPER COMPLEX!) 🔥
+═════════════════════════════════════════════════════════════════════════════
+
+Table Name: BookAuthor
+Columns: BookID, BookTitle, AuthorID, AuthorName, PublisherID, PublisherName
+Primary Key: BookID, AuthorID
+
+Functional Dependencies:
+  BookID → BookTitle
+  BookID → PublisherID
+  PublisherID → PublisherName
+  AuthorID → AuthorName
+
+Expected Result: 2NF with violations
+✅ Will normalize to 4 tables
+
+─────────────────────────────────────────────────────────────────────────
+
+🔥 TEST #5: HOSPITAL PATIENT 🔥
+═════════════════════════════════════════════════════════════════════════════
+
+Table Name: PatientMedical
+Columns: PatientID, PatientName, DoctorID, DoctorName, DepartmentID, DepartmentName
+Primary Key: PatientID
+
+Functional Dependencies:
+  PatientID → PatientName
+  PatientID → DoctorID
+  DoctorID → DoctorName
+  DoctorID → DepartmentID
+  DepartmentID → DepartmentName
+
+Expected Result: 2NF with transitive dependency
+✅ Will normalize to 3 tables
+
+═════════════════════════════════════════════════════════════════════════════
+
+HOW TO INPUT INTO DB-NORM:
+─────────────────────────────────────────────────────────────────────────
+
+1. Open http://localhost:5173
+
+2. Under "TABLE NAME" field:
+   └─ Copy table name from above
+
+3. Under "COLUMNS" section:
+   └─ Click "+" button multiple times
+   └─ Enter each column name
+
+4. Under "PRIMARY KEY" field:
+   └─ Copy primary key from above
+
+5. Under "FUNCTIONAL DEPENDENCIES (BCNF)" section:
+   └─ Click "+" button for each dependency
+   └─ Left side (LHS): Copy the source
+   └─ Right side (RHS): Copy the target
+   └─ Example: EmpID → EmpName
+      → Left: EmpID
+      → Right: EmpName
+
+6. Click the "Analyze" or "Detect" button
+   └─ It will show current Normal Form
+
+7. Click "Normalize to 3NF" or "Normalize to BCNF"
+   └─ It will show decomposed tables
+
+═════════════════════════════════════════════════════════════════════════════
+
+QUICK VERIFICATION:
+─────────────────────────────────────────────────────────────────────────
+
+Test #1 (Employee):
+  Expected: 2NF
+  ✅ Shows violations about DeptID dependencies
+  ✅ Creates 2 tables when normalizing
+
+Test #2 (Employee Simple):
+  Expected: 3NF
+  ✅ Shows no violations
+  ✅ No changes when normalizing
+
+Test #3 (CourseRegistration):
+  Expected: 2NF
+  ✅ Shows partial dependency violation
+  ✅ Creates 4 tables when normalizing
+
+Test #4 (BookAuthor):
+  Expected: 2NF
+  ✅ Shows multiple violations
+  ✅ Creates 4 tables when normalizing
+
+Test #5 (Hospital):
+  Expected: 2NF
+  ✅ Shows transitive dependency
+  ✅ Creates 3 tables when normalizing
+
+═════════════════════════════════════════════════════════════════════════════
+
+✅ IF ALL RESULTS MATCH EXPECTED → NORMALIZATION IS WORKING PERFECTLY!
+
+═════════════════════════════════════════════════════════════════════════════
+
+WHAT TO LOOK FOR:
+─────────────────────────────────────────────────────────────────────────
+
+After Detecting (Analyze button):
+  ✓ Shows "Highest Normal Form" (1NF, 2NF, 3NF, or BCNF)
+  ✓ Shows "Reasons" for violations if any
+  ✓ Shows "Candidate Keys"
+
+After Normalizing:
+  ✓ Shows decomposed tables
+  ✓ Shows new table names
+  ✓ Shows columns in each table
+  ✓ Foreign key relationships visible
+
+═════════════════════════════════════════════════════════════════════════════
+
+TESTING TIPS:
+─────────────────────────────────────────────────────────────────────────
+
+1. Start with Test #2 (simplest)
+2. Then Test #1 (most common scenario)
+3. Then Test #3 (composite primary key)
+4. Then Tests #4 and #5 (complex cases)
+
+If any test fails to show expected output:
+  • Check if you entered all columns correctly
+  • Check if functional dependencies are complete
+  • Verify primary key is correct
+  • Try refreshing the page
+
+═════════════════════════════════════════════════════════════════════════════
