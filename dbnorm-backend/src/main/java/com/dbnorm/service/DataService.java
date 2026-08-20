@@ -54,22 +54,33 @@ public class DataService {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(file.getInputStream(), StandardCharsets.UTF_8));
              CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim())) {
 
-            Set<String> headers = new HashSet<>();
+            Map<String, String> canonicalHeaders = new LinkedHashMap<>();
             for (String header : csvParser.getHeaderNames()) {
-                headers.add(header.replaceFirst("^\\uFEFF", "").trim().toLowerCase(Locale.ROOT));
+                String canonicalHeader = canonicalizeHeader(header);
+                if (canonicalHeaders.put(canonicalHeader, header) != null) {
+                    throw new IllegalArgumentException("CSV contains duplicate headers: " + header);
+                }
             }
             for (String attribute : attributes) {
-                if (!headers.contains(attribute.trim().toLowerCase(Locale.ROOT))) {
+                if (!canonicalHeaders.containsKey(canonicalizeHeader(attribute))) {
                     throw new IllegalArgumentException("CSV is missing the schema attribute: " + attribute);
                 }
             }
 
             List<Map<String, String>> records = new ArrayList<>();
             for (CSVRecord csvRecord : csvParser) {
-                records.add(csvRecord.toMap());
+                Map<String, String> record = new LinkedHashMap<>();
+                for (Map.Entry<String, String> entry : csvRecord.toMap().entrySet()) {
+                    record.put(canonicalizeHeader(entry.getKey()), entry.getValue());
+                }
+                records.add(record);
             }
             return records;
         }
+    }
+
+    private String canonicalizeHeader(String header) {
+        return header.replaceFirst("^\\uFEFF", "").trim().toLowerCase(Locale.ROOT);
     }
 
     private List<Map<String, String>> projectAndDeduplicate(List<Map<String, String>> allRecords, Set<String> targetAttributes) {
@@ -82,7 +93,7 @@ public class DataService {
             
             for (String col : targetAttributes) {
                 // Case-insensitive lookup for column value
-                String val = findValue(record, col);
+                String val = record.get(canonicalizeHeader(col));
                 if (val == null) val = ""; 
                 newRow.put(col, val);
             }
@@ -94,12 +105,4 @@ public class DataService {
         return resultRows;
     }
 
-    private String findValue(Map<String, String> record, String colName) {
-        for (Map.Entry<String, String> entry : record.entrySet()) {
-            if (entry.getKey().equalsIgnoreCase(colName)) {
-                return entry.getValue();
-            }
-        }
-        return null;
-    }
 }

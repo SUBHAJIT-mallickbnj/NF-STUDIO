@@ -43,6 +43,22 @@ class DbnormBackendApplicationTests {
     }
 
     @Test
+    void normalizeCsvWithBomAndCaseInsensitiveHeaders() throws Exception {
+        SchemaRequest req = new SchemaRequest();
+        req.setAttributes(List.of("ID", "Name"));
+        req.setPrimaryKey(List.of("ID"));
+        req.setFunctionalDependencies(List.of());
+        MockMultipartFile file = new MockMultipartFile(
+                "file", "people.csv", "text/csv", "\uFEFF id , NAME\n1,Alice\n1,Alice\n2,Bob\n".getBytes());
+
+        var result = dataService.processDataNormalization(file, req, "1NF");
+
+        assertEquals(1, result.size());
+        assertEquals(2, result.get(0).getRows().size());
+        assertEquals("Alice", result.get(0).getRows().get(0).get("Name"));
+    }
+
+    @Test
     void detectShouldReturn4NFWhenMvdIsSatisfied() {
         SchemaRequest req = new SchemaRequest();
         req.setTableName("StudentCourseHobby");
