@@ -1,6 +1,6 @@
 <div align="center">
 
-# DBNorm – An Efficient Database Normalizer 🚀
+# NF STUDIO – An Efficient Database Normalizer 🚀
 
 ### 🎓 B.Tech  Major Project (5TH Semester Capstone)
 **Asansol Engineering College** (Affiliated with MAKAUT)
@@ -14,8 +14,7 @@
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-🌐 **Live Client Application:** [db-norm-kohl.vercel.app](https://db-norm-kohl.vercel.app)  
-⚙️ **Production Backend API:** [dbnorm-api.onrender.com](https://dbnorm-api.onrender.com)
+
 
 </div>
 
@@ -23,7 +22,7 @@
 
 ## 📖 Introduction
 
-DBNorm is an advanced, full-stack database design and engineering platform. The system bridges the gap between relational database theory and real-world database optimization by automating the entire normalization pipeline.
+NF STUDIO is an advanced, full-stack database design and engineering platform. The system bridges the gap between relational database theory and real-world database optimization by automating the entire normalization pipeline.
 
 The production-ready version features a **Real-Data Processing Engine** that handles actual user-uploaded CSV files, analyzes complex dependencies, and actively decomposes redundant datasets into clean, optimized structures all the way up to the **Fifth Normal Form (5NF)**.
 
@@ -44,8 +43,7 @@ This system was conceptualized, designed, and engineered as a personal effort:
 
   🔗 [LinkedIn](https://www.linkedin.com/in/subhajit-mallick-345113241)
 
-### 🎓 Academic Supervision
-> Project developed under the esteemed guidance of **Dr. Monish Chatterjee** (Professor & Head of Department, Department of Computer Science and Engineering).
+
 ---
 
 ## 📂 Repository Structure (Monorepo)
@@ -103,7 +101,7 @@ This starts the Spring Boot API on `http://localhost:8080` and the compiled Vite
 * **Data Visualization:** Custom SVG Layout Engines (for rendering dependency graphs)
 
 ### Backend
-* **Core Framework:** Java 17 & Spring Boot Framework
+* **Core Framework:** Java 21 & Spring Boot Framework
 * **Build Architecture:** Maven Dependency Manager
 * **API Pattern:** Stateless RESTful APIs
 * **Processing Libraries:** OpenCSV (for raw data stream parsing) & Zip4j (for multi-table export compression)
@@ -134,7 +132,7 @@ The production instance of DBNorm runs on a modern, decoupled, cloud-native arch
 
 ## 🚀 Future Scope & Extensions
 
-While DBNorm successfully automates the entire core normalization pipeline up to 5NF, we look forward to scaling the platform with the following enhancements:
+While NF STUDIO successfully automates the entire core normalization pipeline up to 5NF, we look forward to scaling the platform with the following enhancements:
 * **Automated SQL DDL Generation:** Dynamically generate the actual optimized `CREATE TABLE` SQL scripts with foreign key constraints based on the decomposed normal forms.
 * **Direct Database Integration:** Expand the data engine to allow users to connect live databases via connection strings (JDBC) rather than relying strictly on static `.csv` uploads.
 * **AI-Assisted Dependency Discovery:** Implement machine learning heuristics to scan uploaded datasets and automatically predict potential functional and multi-valued dependencies for the user.
@@ -143,6 +141,6 @@ While DBNorm successfully automates the entire core normalization pipeline up to
 
 <div align="center">
 
-Thank you for visiting **DBNorm**! If you find this project helpful for understanding relational database theory or optimizing your schemas, feel free to star the repository. ⭐
+Thank you for visiting **NF STUDIO**! If you find this project helpful for understanding relational database theory or optimizing your schemas, feel free to star the repository. ⭐
 
 </div>
